@@ -59,6 +59,7 @@ def main():
     # default_model_dir = 'all_models'
 
     default_model = 'mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
+    # default_model = 'efficientdet_lite3_512_ptq_edgetpu.tflite'
     default_labels = 'coco_labels.txt'
 
     parser = argparse.ArgumentParser()
