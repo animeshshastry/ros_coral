@@ -60,7 +60,10 @@ def main():
 
     default_model = 'mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
     # default_model = 'efficientdet_lite3_512_ptq_edgetpu.tflite'
+    # default_model = 'quant_coco-tiny-v3-relu_edgetpu.tflite'
+
     default_labels = 'coco_labels.txt'
+    default_labels = 'coco.names'
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', help='.tflite model path',
@@ -101,6 +104,7 @@ def main():
                 cv2_im = bridge.imgmsg_to_cv2(frames[i], desired_encoding='passthrough')
                 cv2_im_rgb = cv2.cvtColor(cv2_im, cv2.COLOR_BGR2RGB)
                 cv2_im_rgb = cv2.resize(cv2_im_rgb, inference_size)
+                
                 run_inference(interpreter, cv2_im_rgb.tobytes())
                 objs = get_objects(interpreter, args.threshold)[:args.top_k]
                 cv2_im = append_objs_to_img(cv2_im, inference_size, objs, labels)
